@@ -28,12 +28,19 @@ function App() {
       }
     ))
   }
+
+
+  function excluirPublicacao(index){
+      setPublicacoes(publicacoes.filter((publicacao, i) => {
+          return i != index;
+      }))
+  }
   return (
     
     <div className="min-h-screen bg-gray-100">
         <Header />
         <CriarPublicacao adicionarPublicacao={adicionarPublicacao}/>
-        <Feed publicacoes={publicacoes} curtirPublicacao={curtirPublicacao}/>
+        <Feed publicacoes={publicacoes} curtirPublicacao={curtirPublicacao} excluirPublicacao={excluirPublicacao}/>
      </div>
       
     

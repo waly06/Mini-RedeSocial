@@ -1,6 +1,13 @@
 import { Heart } from 'lucide-react'
+import { Trash2Icon } from 'lucide-react'
+import { useState } from 'react'
+import { MessageCircle } from 'lucide-react'
 
-function Feed({ publicacoes, curtirPublicacao }){
+function Feed({ publicacoes, curtirPublicacao, excluirPublicacao }){
+
+    const [ secaoComentario, setSecaoComentario ] = useState({})
+
+
 
     return(
         <div className="max-w-xl mx-auto mt-6 px-4">
@@ -28,6 +35,26 @@ function Feed({ publicacoes, curtirPublicacao }){
                                     onClick={() => curtirPublicacao(index)}
                                 >
                                     <Heart size={22}className='text-red-500' fill={publicacao.curtido ? "red" : "none"}/>
+                                </button>
+                                <button 
+                                    className="flex items-center justify-center p-2 rounded-full hover:scale-110 transition"
+                                    onClick={() => excluirPublicacao(index)}    
+                                >
+                                    <Trash2Icon size={22} />
+                                </button>
+                                <button className="flex items-center justify-center p-2 rounded-full hover:scale-110 transition" onClick={() => {
+                                    const novoEstado = {...secaoComentario}
+                                    setSecaoComentario({...novoEstado, [index]: !novoEstado[index]})
+
+                                    if(secaoComentario[index] == true ){
+                                        return (
+                                            <textarea placeholder='Digite sua resposta...'></textarea>
+                                        )
+                                    } else{
+                                        return;
+                                    }
+                                }}>
+                                    <MessageCircle />
                                 </button>
 
                                 <span className="text-sm text-gray-600">
